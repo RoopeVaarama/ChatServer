@@ -5,10 +5,18 @@ public class ChatMessage(var message: String = ""){
     val currentTime = LocalDateTime.now()
     val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
     val formattedTime = currentTime.format(formatter)
+
+    override fun toString(): String {
+        return message
+    }
 }
 
 object ChatHistory : ChatHistoryObservable {
     private val observers = mutableListOf<ChatHistoryObserver>()
+
+    fun insert(message: ChatMessage) {
+        listOfChatMessages.add(message)
+    }
 
     override fun registerObserver(observer: ChatHistoryObserver) {
         observers.add(observer)
@@ -41,4 +49,5 @@ interface ChatHistoryObservable {
 
 interface ChatHistoryObserver {
     fun newMessage(message:ChatMessage)
+
 }

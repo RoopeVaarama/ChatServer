@@ -4,13 +4,14 @@ class ChatServer{
     fun serve() {
         try {
             val serverSocket = ServerSocket(30001, 3)
-            val chatConnector = ChatConnector(System.`in`, System.out)
-            chatConnector.run()
+
             while(true) {
                 val s = serverSocket.accept()
                 println("new connection " + s.inetAddress.hostAddress + " " + s.port)
 
-                val t = Thread(ChatConnector(s.getInputStream(), s.getOutputStream()))
+                val chatConnector = ChatConnector(s)
+
+                val t = Thread(chatConnector)
                 t.start()
             }
         } catch (e: Exception) {
