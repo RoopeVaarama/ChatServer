@@ -1,10 +1,9 @@
-import java.time.LocalDateTime
+import kotlinx.serialization.ContextualSerialization
+import kotlinx.serialization.Serializable
 import java.time.format.DateTimeFormatter
 
-public class ChatMessage(var message: String = ""){
-    val currentTime = LocalDateTime.now()
-    val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
-    val formattedTime = currentTime.format(formatter)
+@Serializable
+public class ChatMessage(var message: String = "", var formattedtime : String = ""){
 
     override fun toString(): String {
         return message
@@ -35,7 +34,7 @@ object ChatHistory : ChatHistoryObservable {
     override fun toString(): String {
         var chatHistory : String = ""
         for (chatMessage in listOfChatMessages) {
-            chatHistory += (chatMessage.formattedTime) + (" ") + (chatMessage.message) + "\n"
+            chatHistory += (chatMessage.formattedtime) + (" ") + (chatMessage.message) + "\n"
         }
         return chatHistory
     }

@@ -3,6 +3,8 @@ import java.io.OutputStream
 import java.io.PrintStream
 import java.io.PrintWriter
 import java.net.Socket
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Scanner
 
 public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver{
@@ -21,10 +23,12 @@ public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver{
         while(true) {
             println("Insert message")
             val userinput: String = scanner1.nextLine()
-
+            val currentTime = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
+            val formattedTime = currentTime.format(formatter)
 
             //creates an object of ChatMessage type of the user input
-            val messageObject = ChatMessage(userinput)
+            val messageObject = ChatMessage(userinput, formattedTime)
             ChatHistory.insert(messageObject)
             println(ChatHistory.toString())
         }
