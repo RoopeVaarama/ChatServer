@@ -26,8 +26,9 @@ public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver{
             //creates an object of ChatMessage type of the user input
             val messageObject = ChatMessage(userinput)
             ChatHistory.insert(messageObject)
+            println(ChatHistory.toString())
         }
-        println(ChatHistory.toString())
+
     }
 
 }
