@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter
 
 public class ChatMessage(var message: String = ""){
     val currentTime = LocalDateTime.now()
-    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+    val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
     val formattedTime = currentTime.format(formatter)
 }
 
