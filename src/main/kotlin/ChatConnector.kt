@@ -13,8 +13,8 @@ public class ChatConnector(inputStream: InputStream, out: OutputStream) : Runnab
 
         //creates an object of ChatMessage type of the user input
         val messageObject = ChatMessage(userinput)
-        ChatHistory.insert(messageObject)
-        ChatHistory.insert(messageObject)
+        /*ChatHistory.insert(messageObject)
+        ChatHistory.insert(messageObject)*/
         println(ChatHistory.toString())
     }
 

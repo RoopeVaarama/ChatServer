@@ -7,12 +7,22 @@ public class ChatMessage(var message: String = ""){
     val formattedTime = currentTime.format(formatter)
 }
 
-object ChatHistory {
-    val listOfChatMessages = mutableListOf<ChatMessage>()
+object ChatHistory : ChatHistoryObservable {
+    private val observers = mutableListOf<ChatHistoryObserver>()
 
-    fun insert(message: ChatMessage){
-        listOfChatMessages.add(message)
+    override fun registerObserver(observer: ChatHistoryObserver) {
+        observers.add(observer)
     }
+
+    override fun deregisterObserver(observer: ChatHistoryObserver) {
+        observers.remove(observer)
+    }
+
+    override fun notifyObservers(message: ChatMessage) {
+        observers.forEach{it.newMessage(message)}
+    }
+
+    val listOfChatMessages = mutableListOf<ChatMessage>()
 
     override fun toString(): String {
         var chatHistory : String = ""
@@ -23,12 +33,12 @@ object ChatHistory {
     }
 }
 
-interface ChatHistoryObserver {
+interface ChatHistoryObservable {
     fun registerObserver(observer:ChatHistoryObserver)
     fun deregisterObserver(observer:ChatHistoryObserver)
     fun notifyObservers (message:ChatMessage)
 }
 
-interface ChatHistoryObservable {
+interface ChatHistoryObserver {
     fun newMessage(message:ChatMessage)
 }
