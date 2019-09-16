@@ -1,3 +1,4 @@
+import kotlinx.serialization.json.Json
 import java.io.InputStream
 import java.io.OutputStream
 import java.io.PrintStream
@@ -7,12 +8,14 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Scanner
 
+
 public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver{
     private val printStream = PrintWriter(s.getOutputStream())
     private val scanner1 = Scanner(s.getInputStream())
     override fun newMessage(message: ChatMessage) {
 
-        printStream.println(message)
+        var newmessage = Json.stringify(ChatMessage.serializer(), message)
+        printStream.println(newmessage)
     }
 
 
@@ -29,8 +32,11 @@ public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver{
 
             //creates an object of ChatMessage type of the user input
             val messageObject = ChatMessage(userinput, formattedTime)
-            ChatHistory.insert(messageObject)
-            println(ChatHistory.toString())
+            val messageObjectJson = Json.stringify(ChatMessage.serializer(), messageObject)
+            val messageObjectparse = Json.parse(ChatMessage.serializer(), messageObjectJson)
+            ChatHistory.insert(messageObjectparse)
+            printStream.println(messageObjectJson)
+
         }
 
     }
