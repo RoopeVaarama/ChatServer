@@ -4,7 +4,7 @@ import kotlinx.serialization.json.Json
 import java.time.format.DateTimeFormatter
 
 @Serializable
-public class ChatMessage(var message: String = "", var formattedtime : String = ""){
+public class ChatMessage(var message: String = "", var formattedtime : String = "", var username : String = ""){
 
 
     override fun toString(): String {

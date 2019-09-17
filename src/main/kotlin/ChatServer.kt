@@ -1,4 +1,6 @@
+import java.io.PrintWriter
 import java.net.ServerSocket
+import java.util.*
 
 class ChatServer{
     fun serve() {
@@ -8,6 +10,7 @@ class ChatServer{
             while(true) {
                 val s = serverSocket.accept()
                 println("new connection " + s.inetAddress.hostAddress + " " + s.port)
+
 
                 val chatConnector = ChatConnector(s)
                 ChatHistory.registerObserver(chatConnector)
