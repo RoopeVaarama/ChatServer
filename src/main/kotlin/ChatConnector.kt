@@ -8,10 +8,21 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Scanner
 
+/**
+ * Created by Topias, Roope and Tiia
+ */
+
+
 
 public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
+
+    //Getting the input and output streams from the socket
     private val printStream = PrintWriter(s.getOutputStream())
     private val scanner1 = Scanner(s.getInputStream())
+
+
+    //This function is called whenever a new message is received by the server.
+    //Prints the message to every observer.
     override fun newMessage(message: ChatMessage) {
         var messageObjectJson = Json.stringify(ChatMessage.serializer(), message)
         printStream.println(messageObjectJson) // goes to buffer
@@ -54,14 +65,14 @@ public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
                 "-history" -> printStream.println(ChatHistory.toString())
                 "-users" -> printStream.println(Users.toString())
                 else -> {
+                    //Gets the current time
                     val currentTime = LocalDateTime.now()
                     val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
                     val formattedTime = currentTime.format(formatter)
 
-                    //creates an object of ChatMessage type of the user input
+                    //Creates an object of ChatMessage type of the user input, time and username
                     val messageObject = ChatMessage(userinput, formattedTime, userName)
                     ChatHistory.insert(messageObject)
-                    //println(messageObjectJson)
                 }
             }
             printStream.flush()

@@ -2,6 +2,14 @@ import java.io.PrintWriter
 import java.net.ServerSocket
 import java.util.*
 
+/**
+ * Created by Topias, Roope and Tiia
+ */
+
+/**
+ * When the server is started, this class handles all new connection requests
+ * and starts a new session with a new thread for every client
+ */
 class ChatServer{
     fun serve() {
         try {
@@ -14,6 +22,8 @@ class ChatServer{
 
                 val chatConnector = ChatConnector(s)
                 ChatHistory.registerObserver(chatConnector)
+                val newTopChatter = TopChatter()
+                ChatHistory.registerObserver(newTopChatter)
 
                 val t = Thread(chatConnector)
                 t.start()

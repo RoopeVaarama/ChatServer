@@ -1,5 +1,12 @@
 import kotlinx.serialization.enumFromName
 
+/**
+ * Created by Topias, Roope and Tiia
+ */
+
+/**
+ * This singleton handles all the user data
+ */
 object Users {
 
     val setofUsers = hashSetOf<String>()
