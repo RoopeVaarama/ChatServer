@@ -20,13 +20,16 @@ public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver{
 
 
     override fun run(){
-
         //creates a scanner for reading user input
 
         printStream.println("Insert message")
         printStream.flush()
         while(true) {
             val userinput: String = scanner1.nextLine()
+            when (userinput) {
+                "-history" -> printStream.println(ChatHistory.toString())
+
+            }
             val currentTime = LocalDateTime.now()
             val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
             val formattedTime = currentTime.format(formatter)
