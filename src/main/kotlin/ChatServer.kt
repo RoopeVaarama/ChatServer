@@ -10,6 +10,7 @@ class ChatServer{
                 println("new connection " + s.inetAddress.hostAddress + " " + s.port)
 
                 val chatConnector = ChatConnector(s)
+                ChatHistory.registerObserver(chatConnector)
 
                 val t = Thread(chatConnector)
                 t.start()

@@ -13,10 +13,11 @@ public class ChatMessage(var message: String = "", var formattedtime : String = 
 }
 
 object ChatHistory : ChatHistoryObservable {
-    private val observers = mutableListOf<ChatHistoryObserver>()
+    private val observers = mutableSetOf<ChatHistoryObserver>()
 
     fun insert(message: ChatMessage) {
         listOfChatMessages.add(message)
+        notifyObservers(message)
     }
 
     override fun registerObserver(observer: ChatHistoryObserver) {

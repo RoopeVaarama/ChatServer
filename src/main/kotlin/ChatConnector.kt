@@ -13,9 +13,9 @@ public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver{
     private val printStream = PrintWriter(s.getOutputStream())
     private val scanner1 = Scanner(s.getInputStream())
     override fun newMessage(message: ChatMessage) {
-
-        var newmessage = Json.stringify(ChatMessage.serializer(), message)
-        printStream.println(newmessage)
+        var messageObjectJson = Json.stringify(ChatMessage.serializer(), message)
+        printStream.println(messageObjectJson) // goes to buffer
+        printStream.flush() // pushes it from buffer
     }
 
 
@@ -23,8 +23,9 @@ public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver{
 
         //creates a scanner for reading user input
 
+        printStream.println("Insert message")
+        printStream.flush()
         while(true) {
-            println("Insert message")
             val userinput: String = scanner1.nextLine()
             val currentTime = LocalDateTime.now()
             val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
@@ -32,11 +33,8 @@ public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver{
 
             //creates an object of ChatMessage type of the user input
             val messageObject = ChatMessage(userinput, formattedTime)
-            val messageObjectJson = Json.stringify(ChatMessage.serializer(), messageObject)
-            val messageObjectparse = Json.parse(ChatMessage.serializer(), messageObjectJson)
-            ChatHistory.insert(messageObjectparse)
-            printStream.println(messageObjectJson)
-
+            ChatHistory.insert(messageObject)
+            //println(messageObjectJson)
         }
 
     }
