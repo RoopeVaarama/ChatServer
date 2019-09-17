@@ -63,8 +63,8 @@ public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
                     ChatHistory.insert(messageObject)
                     //println(messageObjectJson)
                 }
-
             }
+            printStream.flush()
         }
 
     }
