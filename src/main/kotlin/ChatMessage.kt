@@ -8,7 +8,7 @@ public class ChatMessage(var message: String = "", var formattedtime : String = 
 
 
     override fun toString(): String {
-        return message
+        return message + formattedtime
     }
 }
 
