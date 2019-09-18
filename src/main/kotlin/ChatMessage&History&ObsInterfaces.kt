@@ -3,15 +3,25 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import java.time.format.DateTimeFormatter
 
+/**
+ * Created by Topias, Roope and Tiia
+ */
+
+
+/**
+ * Chat message is the basic message class.
+ */
 @Serializable
-public class ChatMessage(var message: String = "", var formattedtime : String = ""){
-
-
+public class ChatMessage(var message: String = "", var formattedtime : String = "", var username : String = ""){
     override fun toString(): String {
-        return message + formattedtime
+        return message + formattedtime + username
     }
 }
 
+/**
+ * ChatHistory holds a list of the entire chat history and observers that
+ * observe it's changes.
+ */
 object ChatHistory : ChatHistoryObservable {
     private val observers = mutableSetOf<ChatHistoryObserver>()
 
@@ -34,8 +44,8 @@ object ChatHistory : ChatHistoryObservable {
 
     val listOfChatMessages = mutableListOf<ChatMessage>()
 
+    //Returns the entire chat history as a single string
     override fun toString(): String {
-
         var chatHistory : String = ""
         for (chatMessage in listOfChatMessages) {
             chatHistory += (chatMessage.formattedtime) + (" ") + (chatMessage.message) + "\n"
