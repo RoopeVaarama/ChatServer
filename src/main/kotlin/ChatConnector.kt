@@ -64,6 +64,7 @@ public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
             when (userinput) {
                 "-history" -> printStream.println(ChatHistory.toString())
                 "-users" -> printStream.println(Users.toString())
+                "-topchatter" -> printStream.println(TopChatter.toString())
                 else -> {
                     //Gets the current time
                     val currentTime = LocalDateTime.now()

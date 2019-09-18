@@ -22,8 +22,7 @@ class ChatServer{
 
                 val chatConnector = ChatConnector(s)
                 ChatHistory.registerObserver(chatConnector)
-                val newTopChatter = TopChatter()
-                ChatHistory.registerObserver(newTopChatter)
+                ChatHistory.registerObserver(TopChatter)
 
                 val t = Thread(chatConnector)
                 t.start()

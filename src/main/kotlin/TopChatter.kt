@@ -6,7 +6,7 @@
  * TopChatter class includes a list of the most active chatters
  * and it updates everytime a new message is posted.
  */
-class TopChatter() : ChatHistoryObserver {
+object TopChatter : ChatHistoryObserver {
     private val activeUsersMessages = mutableMapOf<String, Int>()
     override fun newMessage(message: ChatMessage) {
         if (message.username !in activeUsersMessages.keys) {
@@ -18,8 +18,14 @@ class TopChatter() : ChatHistoryObserver {
             }
         }
         activeUsersMessages.forEach {
-
-            k, v -> println("$k: $v")
+                k, v -> println("$k: $v")
         }
+    }
+    override fun toString(): String {
+        var returnedString : String =""
+        activeUsersMessages.forEach{
+            k, v -> returnedString += "$k: $v \n"
+        }
+        return returnedString
     }
 }
