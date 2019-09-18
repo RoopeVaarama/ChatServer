@@ -12,9 +12,9 @@ import java.time.format.DateTimeFormatter
  * Chat message is the basic message class.
  */
 @Serializable
-public class ChatMessage(var message: String = "", var formattedtime : String = "", var username : String = ""){
+public class ChatMessage(var message: String = " ", var formattedtime : String = " ", var username : String = " "){
     override fun toString(): String {
-        return message + formattedtime + username
+        return "Message: " + message + " Time: " + formattedtime + " User: " + username
     }
 }
 
@@ -63,4 +63,9 @@ interface ChatHistoryObservable {
 interface ChatHistoryObserver {
     fun newMessage(message:ChatMessage)
 
+}
+object ChatConsole : ChatHistoryObserver {
+    override fun newMessage(message: ChatMessage) {
+        println(message)
+    }
 }

@@ -9,9 +9,6 @@ import java.util.Scanner
 /**
  * Created by Topias, Roope and Tiia
  */
-
-
-
 class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
 
     //Getting the input and output streams from the socket
