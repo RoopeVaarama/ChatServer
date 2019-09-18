@@ -1,7 +1,7 @@
 /**
  * Created by Topias, Roope and Tiia
  */
-fun main(args: Array<String>) {
+fun main() {
     val newServer = ChatServer()
     newServer.serve()
 }

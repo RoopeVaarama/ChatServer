@@ -18,13 +18,13 @@ object TopChatter : ChatHistoryObserver {
             }
         }
         activeUsersMessages.forEach {
-                k, v -> println("$k: $v")
+                (k, v) -> println("$k: $v")
         }
     }
     override fun toString(): String {
-        var returnedString : String =""
+        var returnedString = ""
         activeUsersMessages.forEach{
-            k, v -> returnedString += "$k: $v \n"
+                (k, v) -> returnedString += "$k: $v \n"
         }
         return returnedString
     }

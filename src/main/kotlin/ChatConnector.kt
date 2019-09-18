@@ -1,7 +1,5 @@
+import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
-import java.io.InputStream
-import java.io.OutputStream
-import java.io.PrintStream
 import java.io.PrintWriter
 import java.net.Socket
 import java.time.LocalDateTime
@@ -14,7 +12,7 @@ import java.util.Scanner
 
 
 
-public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
+class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
 
     //Getting the input and output streams from the socket
     private val printStream = PrintWriter(s.getOutputStream())
@@ -23,8 +21,9 @@ public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
 
     //This function is called whenever a new message is received by the server.
     //Prints the message to every observer.
+    @UnstableDefault
     override fun newMessage(message: ChatMessage) {
-        var messageObjectJson = Json.stringify(ChatMessage.serializer(), message)
+        val messageObjectJson = Json.stringify(ChatMessage.serializer(), message)
         printStream.println(messageObjectJson) // goes to buffer
         printStream.flush() // pushes it from buffer
     }
@@ -42,7 +41,7 @@ public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
         while (true) {
             if (userName !in Users.setofUsers) {
                 Users.insertUser(userName)
-                break;
+                break
             } else {
                 printStream.println("Username already in use! Try another one.")
                 printStream.flush()
@@ -52,16 +51,14 @@ public class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
         printStream.println("You have entered the chat room.")
         printStream.flush()
 
-
-        /**
+        /*
          * This loop continously asks the user for input. If input is provided, it checks
          * if it's a command and issues the proper response. If it is not an command, it
          * adds the message to ChatHistory singleton.
          * ====================================================================
          */
         while (true) {
-            val userinput: String = scanner1.nextLine()
-            when (userinput) {
+            when (val userinput: String = scanner1.nextLine()) {
                 "-history" -> printStream.println(ChatHistory.toString())
                 "-users" -> printStream.println(Users.toString())
                 "-topchatter" -> printStream.println(TopChatter.toString())

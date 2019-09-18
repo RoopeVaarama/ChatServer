@@ -11,9 +11,7 @@ object Users {
     val setofUsers = hashSetOf<String>()
 
     fun insertUser(name: String) {
-        if (name in setofUsers) {
-
-        } else {
+        if(name !in setofUsers) {
             setofUsers.add(name)
         }
     }
@@ -23,7 +21,7 @@ object Users {
         }
     }
     override fun toString(): String {
-        var userNames: String = ""
+        var userNames = ""
         for (name in setofUsers) {
             userNames += (name) + "\n"
         }
