@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter
 import java.util.Scanner
 
 /**
- * Created by Topias, Roope and Tiia
+ * Created by Roope
  */
 class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
 

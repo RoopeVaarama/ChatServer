@@ -1,5 +1,5 @@
 /**
- * Created by Topias, Roope and Tiia
+ * Created by Roope
  */
 fun main() {
     val newServer = ChatServer()

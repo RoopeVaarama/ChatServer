@@ -1,7 +1,7 @@
 import java.net.ServerSocket
 
 /**
- * Created by Topias, Roope and Tiia
+ * Created by Roope
  */
 
 /**

@@ -1,7 +1,7 @@
 import kotlinx.serialization.Serializable
 
 /**
- * Created by Topias, Roope and Tiia
+ * Created by Roope
  */
 
 
@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
  * Chat message is the basic message class.
  */
 @Serializable
-class ChatMessage(var message: String = " ", /*var formattedtime : String = " ".*/ var username : String = " "){
+class ChatMessage(var message: String = " ", var username : String = " "){
     override fun toString(): String {
         /*Time: $formattedtime*/
         return "Message: $message User: $username"

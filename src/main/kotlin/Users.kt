@@ -1,7 +1,7 @@
 import kotlinx.serialization.enumFromName
 
 /**
- * Created by Topias, Roope and Tiia
+ * Created by Roope
  */
 
 /**
