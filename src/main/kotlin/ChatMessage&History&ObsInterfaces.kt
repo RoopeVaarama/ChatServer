@@ -9,9 +9,10 @@ import kotlinx.serialization.Serializable
  * Chat message is the basic message class.
  */
 @Serializable
-class ChatMessage(var message: String = " ", var formattedtime : String = " ", var username : String = " "){
+class ChatMessage(var message: String = " ", /*var formattedtime : String = " ".*/ var username : String = " "){
     override fun toString(): String {
-        return "Message: $message Time: $formattedtime User: $username"
+        /*Time: $formattedtime*/
+        return "Message: $message User: $username"
     }
 }
 
@@ -45,7 +46,8 @@ object ChatHistory : ChatHistoryObservable {
     override fun toString(): String {
         var chatHistory = ""
         for (chatMessage in listOfChatMessages) {
-            chatHistory += (chatMessage.formattedtime) + (" ") + (chatMessage.message) + "\n"
+            /*(chatMessage.formattedtime) + (" ") +*/
+            chatHistory +=  (chatMessage.message) + "\n"
         }
         return chatHistory
     }
