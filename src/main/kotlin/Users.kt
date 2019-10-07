@@ -25,6 +25,8 @@ object Users {
         for (name in setofUsers) {
             userNames += (name) + "\n"
         }
+
         return userNames
+
     }
 }

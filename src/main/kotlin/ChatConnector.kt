@@ -39,6 +39,9 @@ class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
                 val text = scanner1.nextLine()
                 val message = Json.parse(ChatMessage.serializer(), text)
                 when(message.message){
+                    "-history" -> println(ChatHistory.toString())
+                    "-users" -> println(Users.toString())
+                    "-topchatter" -> println(TopChatter.toString())
                     "/disconnect" -> disconnect()
                     else -> ChatHistory.insert(message)
                 }
@@ -54,72 +57,3 @@ class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
         ChatHistory.insert(ChatMessage("I left the room: " , userName))
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
-         * The next block asks the client for an username and checks if it is not in use.
-         * ====================================================================
-         */
-        //printStream.println("Insert username")
-        //printStream.flush()
-        /*var userName: String = "Roope"
-        while (true) {
-            if (userName !in Users.setofUsers) {
-                Users.insertUser(userName)
-                break
-            } else {
-                //printStream.println("Username already in use! Try another one.")
-                //printStream.flush()
-                userName = scanner1.nextLine()
-            }
-        }
-        //printStream.println("You have entered the chat room.")
-        //printStream.flush()
-
-        /*
-         * This loop continously asks the user for input. If input is provided, it checks
-         * if it's a command and issues the proper response. If it is not an command, it
-         * adds the message to ChatHistory singleton.
-         * ====================================================================
-         */
-        while (true) {
-            when (val userinput: String = scanner1.nextLine()) {
-                //"-history" -> printStream.println(ChatHistory.toString())
-                //"-users" -> printStream.println(Users.toString())
-                //"-topchatter" -> printStream.println(TopChatter.toString())
-                else -> {
-                    //Gets the current time
-                    val currentTime = LocalDateTime.now()
-                    val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
-                    val formattedTime = currentTime.format(formatter)
-
-                    //Creates an object of ChatMessage type of the user input, time and username
-                    val messageObject = ChatMessage(userinput, userName)
-                    ChatHistory.insert(messageObject)
-                }
-            }
-            //printStream.flush()
-        }
-
-    }
-}*/
-
