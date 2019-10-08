@@ -12,6 +12,7 @@ import kotlinx.serialization.Serializable
 class ChatMessage(var message: String = " ", var username : String = " "){
     override fun toString(): String {
         /*Time: $formattedtime*/
+        Users.insertUser(username)
         return "Message: $message User: $username"
     }
 }
