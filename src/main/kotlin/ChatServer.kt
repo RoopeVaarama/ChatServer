@@ -1,13 +1,9 @@
 import java.net.ServerSocket
 
-/**
- * Created by Roope
- */
+/** Created by Roope */
 
-/**
- * When the server is started, this class handles all new connection requests
- * and starts a new session with a new thread for every client
- */
+//When the server is started, this class handles all new connection requests
+//and starts a new session with a new thread for every client
 class ChatServer{
     fun serve() {
         try {

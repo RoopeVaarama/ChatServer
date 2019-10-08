@@ -23,23 +23,24 @@ class ChatMessage(var message: String = " ", var username : String = " "){
 object ChatHistory : ChatHistoryObservable {
     private val observers = mutableSetOf<ChatHistoryObserver>()
 
+    //Add message to the ChatMessage list and notifies observers
     fun insert(message: ChatMessage) {
         listOfChatMessages.add(message)
         notifyObservers(message)
     }
-
+    //registering observer
     override fun registerObserver(observer: ChatHistoryObserver) {
         observers.add(observer)
     }
-
+    //deregister observer
     override fun deregisterObserver(observer: ChatHistoryObserver) {
         observers.remove(observer)
     }
-
+    //notify observer
     override fun notifyObservers(message: ChatMessage) {
         observers.forEach{it.newMessage(message)}
     }
-
+    //list of ChatMessages
     private val listOfChatMessages = mutableListOf<ChatMessage>()
 
     //Returns the entire chat history as a single string
@@ -63,6 +64,7 @@ interface ChatHistoryObserver {
     fun newMessage(message:ChatMessage)
 
 }
+//Prints the new message to the Console when notified by observer
 object ChatConsole : ChatHistoryObserver {
     override fun newMessage(message: ChatMessage) {
         println(message)

@@ -12,6 +12,7 @@ import java.util.Scanner
 class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
 
     //Getting the input and output streams from the socket
+    //variables for empty username and connected in boolean for user connection
     private var userName = ""
     private val printStream = PrintWriter(s.getOutputStream())
     private val scanner1 = Scanner(s.getInputStream())
@@ -27,7 +28,7 @@ class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
         printStream.flush()
     }
 
-
+    //basic run method for handling input data
     override fun run() {
 
         ChatHistory.registerObserver(this)
@@ -50,6 +51,7 @@ class ChatConnector(s: Socket) : Runnable , ChatHistoryObserver {
 
 
     }
+    //Function for calling disconnect
     private fun disconnect(){
         ChatHistory.deregisterObserver(this)
         Users.removeUser(userName)

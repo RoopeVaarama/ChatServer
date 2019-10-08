@@ -2,10 +2,9 @@
  * Created by Topias, Roope and Tiia
  */
 
-/**
- * TopChatter class includes a list of the most active chatters
- * and it updates everytime a new message is posted.
- */
+
+//TopChatter class includes a list of the most active chatters
+//and it updates everytime a new message is posted.
 object TopChatter : ChatHistoryObserver {
     private val activeUsersMessages = mutableMapOf<String, Int>()
     override fun newMessage(message: ChatMessage) {

@@ -5,7 +5,7 @@ import kotlinx.serialization.enumFromName
  */
 
 /**
- * This singleton handles all the user data
+ * This singleton handles all the user data and wasn't applied to the use of chat client
  */
 object Users {
     val setofUsers = hashSetOf<String>()
